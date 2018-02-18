@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/webshop.iml" filepath="$PROJECT_DIR$/.idea/webshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/ICDomain/src/Domain/Domain.iml" filepath="$PROJECT_DIR$/java/ICDomain/src/Domain/Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/webshoprest/src/Webshoprest/Webshoprest.iml" filepath="$PROJECT_DIR$/java/webshoprest/src/Webshoprest/Webshoprest.iml" />
     </modules>
   </component>
 </project>
