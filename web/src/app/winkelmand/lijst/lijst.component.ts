@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, BestelRegel }  from '../../domain';
 @Component({
-  selector: 'app-lijst',
+  selector: 'lijst',
   templateUrl: './lijst.component.html',
   styleUrls: ['./lijst.component.css']
 })
 export class LijstComponent implements OnInit {
   private bestelling : Array<BestelRegel>;
-  constructor() { }
+  constructor() {
+    this.bestelling = new Array<BestelRegel>();
+  }
 
   ngOnInit() {
   }
-  addItem(regel:BestelRegel){
+  addItem(){
+    let regel = new BestelRegel();
+    regel.aantal = 1;
+    regel.product = new Product();
     this.bestelling.push(regel);
   }
   removeItem(regel:BestelRegel){
@@ -21,14 +26,6 @@ export class LijstComponent implements OnInit {
   changeItemCount(regel:BestelRegel, aantal:number){
     regel.aantal = aantal;
   }
-  goToPayment(){
-    /**
-    Controlleer eerst of de afrekening kan plaatsvinden (Alle producten kunnen afgerekend worden)
-    **/
 
-    /**
-    * Stuur door naar de betallings-wizard
-    **/
-    
-  }
+
 }
