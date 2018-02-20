@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, BestelRegel }  from '../../domain';
+import {WinkelmandService } from '../winkelmand.service';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'lijst',
   templateUrl: './lijst.component.html',
@@ -7,16 +10,21 @@ import { Product, BestelRegel }  from '../../domain';
 })
 export class LijstComponent implements OnInit {
   private bestelling : Array<BestelRegel>;
-  constructor() {
+  subscription: Subscription;
+  constructor(private winkelmandService: WinkelmandService) {
     this.bestelling = new Array<BestelRegel>();
+    this.subscription = this.winkelmandService.getProduct().subscribe(product => {
+      let regel = new BestelRegel();
+      regel.product = product;
+      this.addItem(regel);
+    });
+
   }
 
   ngOnInit() {
   }
-  addItem(){
-    let regel = new BestelRegel();
-    regel.aantal = 1;
-    regel.product = new Product();
+  addItem(regel:BestelRegel){
+    
     this.bestelling.push(regel);
   }
   removeItem(regel:BestelRegel){

@@ -2,7 +2,7 @@
   <section class="winkel-lijst" *ngIf="bestelling.length > 0" >
     <ul class="list-group list-group-flush">
       <li *ngFor="let regel of bestelling"  class="list-group-item">{{regel.product.naam}}
-        <button (click)="removeItem(regel)" class="btn btn-danger float-right">Verwijder</button></li>
+        <button (click)="removeItem(regel)" class="btn btn-danger float-right"><i class="ion-ios-trash-outline"></i></button></li>
     </ul>
   </section>
   <section *ngIf="bestelling.length == 0">

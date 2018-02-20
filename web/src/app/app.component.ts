@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import {Product} from './domain';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,10 @@ import 'rxjs/add/operator/map';
 })
 export class AppComponent {
   title = 'app';
-  data: any = null;
+  products : Array<Product>;
 
   constructor(private _http: Http) {
+    this.products = new Array<Product>();
     this.getMyBlog();
   }
 
@@ -20,8 +21,12 @@ export class AppComponent {
     return this._http.get('https://jerrylooman.nl/restservice/')
       .map((res: Response) => res.json())
       .subscribe(data => {
-        this.data = data;
-        console.log(this.data);
+        for (let product of data) {
+          let newproduct = new Product();
+          newproduct.naam = product.product_titel;
+          this.products.push(newproduct);
+        }
+        console.log(this.products);
       });
   }
 }
