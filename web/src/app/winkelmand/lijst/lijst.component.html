@@ -1,13 +1,25 @@
 <section>
   <section class="winkel-lijst" *ngIf="bestelling.length > 0" >
     <ul class="list-group list-group-flush">
-      <li *ngFor="let regel of bestelling"  class="list-group-item">{{regel.product.naam}}
-        <button (click)="removeItem(regel)" class="btn btn-danger float-right"><i class="ion-ios-trash-outline"></i></button></li>
+      <li *ngFor="let regel of bestelling"  class="list-group-item d-flex justify-content-between">
+        <div class="float-left">
+          {{regel.product.naam}}
+        </div>
+        <div class="float-right">
+          <button class="btn btn-primary" (click)="decrementAmount(regel)"><i class="ion-ios-remove"></i></button>
+          <span>{{regel.aantal}}</span>
+          <button class="btn btn-primary" (click)="incrementAmount(regel)"><i class="ion-ios-add"></i></button>
+
+          <button (click)="removeItem(regel)" class="btn btn-danger"><i class="ion-ios-trash-outline"></i></button>
+        </div>
+      </li>
+      <li>
+        {{totalPrice}}
+      </li>
     </ul>
   </section>
   <section *ngIf="bestelling.length == 0">
     Nog geen producten toegevoegd.
   </section>
-  <button (click)="addItem()" class="btn btn-danger">test</button>
 
 </section>

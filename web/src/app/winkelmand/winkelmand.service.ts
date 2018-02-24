@@ -8,7 +8,7 @@ export class WinkelmandService {
     private subject = new Subject<any>();
  
     addToWinkelmand(product: Product) {
-        this.subject.next({ product: Product });
+        this.subject.next(product);
     }
  
  

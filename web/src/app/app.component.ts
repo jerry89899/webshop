@@ -24,6 +24,8 @@ export class AppComponent {
         for (let product of data) {
           let newproduct = new Product();
           newproduct.naam = product.product_titel;
+          newproduct.afbeelding = product.product_afbeelding;
+          newproduct.prijs = product.product_prijs;
           this.products.push(newproduct);
         }
         console.log(this.products);
