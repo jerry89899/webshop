@@ -7,18 +7,24 @@ import { Observable } from 'rxjs';
 export class WinkelmandService {
     private subject = new Subject<any>();
     private deletedSubject = new Subject<any>();
+    private productState = new Subject<any>();
     addToWinkelmand(product: Product) {
         this.subject.next(product);
     }
  
-    getProductDeleted() {
+    getProductDeleted() :Observable<Product> {
       return this.deletedSubject.asObservable();
     }
-    getProduct(): Observable<any> {
+    getProduct(): Observable<Product> {
         return this.subject.asObservable();
     }
-
+    getProductState(){
+      return this.productState.asObservable();
+    }
+    updateProductState(productId : number){
+      this.productState.next(productId);
+    }
     removeFromWinkelmand(product : Product){
-      this.deletedSubject.next({product: Product});
+      this.deletedSubject.next(product);
     }
 }

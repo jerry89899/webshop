@@ -23,12 +23,12 @@ export class AppComponent {
       .subscribe(data => {
         for (let product of data) {
           let newproduct = new Product();
+          newproduct.id = product.product_id;
           newproduct.naam = product.product_titel;
           newproduct.afbeelding = product.product_afbeelding;
           newproduct.prijs = product.product_prijs;
           this.products.push(newproduct);
         }
-        console.log(this.products);
       });
   }
 }

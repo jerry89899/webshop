@@ -2,28 +2,50 @@ import { Component, OnInit, Input, IterableDiffers, DoCheck } from '@angular/cor
 import { Product, BestelRegel }  from '../../../domain';
 import {WinkelmandService } from '../../winkelmand.service';
 import { Subscription } from 'rxjs/Subscription';
-
+import { ProviderService } from '../../data/provider.service';
 @Component({
   selector: 'lijst',
   templateUrl: './lijst.component.html',
   styleUrls: ['./lijst.component.css']
 })
-export class LijstComponent implements DoCheck  {
+export class LijstComponent implements DoCheck, OnInit  {
   @Input('bestelling') bestelling : Array<BestelRegel> = new Array<BestelRegel>();
   addSubscription: Subscription;
   removeSubscription: Subscription;
   differ : any;
   totalPrice : number;
-  constructor(private winkelmandService: WinkelmandService, differs: IterableDiffers) {
+  constructor(
+    private winkelmandService: WinkelmandService,
+    private dataService : ProviderService,
+    differs: IterableDiffers
+  ) {
     this.differ = differs.find([]).create(null);
     this.addSubscription = this.winkelmandService.getProduct().subscribe(product => {
+
       let regel = new BestelRegel();
       regel.product = product;
       this.addItem(regel);
+
     });
     this.removeSubscription = this.winkelmandService.getProductDeleted().subscribe(product => {
-      this.removeItem(product);
+      let regel = this.getRegelByProduct(product);
+      this.removeItem(regel);
     });
+  }
+
+  getRegelByProduct(product: Product) : BestelRegel {
+    let getRegel : BestelRegel = null;
+    this.bestelling.forEach((regel) => {
+      console.log(regel.product.id == product.id);
+      if(regel.product.id == product.id){
+        getRegel = regel;
+      }
+    });
+    return getRegel;
+  }
+
+  ngOnInit(){
+    this.syncBestelling();
   }
   ngDoCheck() {
      const change = this.differ.diff(this.bestelling);
@@ -37,19 +59,36 @@ export class LijstComponent implements DoCheck  {
       });
     }
 
-
     return prijs;
+  }
+  syncBestelling(){
+    /**
+    * Haal lokaal opgeslagen bestelling op
+    **/
+    this.dataService.getBestelling().subscribe((bestelling) => {
+      /**
+      * Update nu alle items in de store (Zodat de knop veranderd)
+      **/
+      bestelling.forEach((regel) => {
+        this.triggerAdd(regel);
+      });
+
+    });
+
   }
 
   addItem(regel:BestelRegel){
-    console.log(this.bestelling);
-    this.bestelling.push(regel);
+      this.bestelling.push(regel);
+      this.dataService.syncBestelling(this.bestelling);
+
   }
   removeItem(regel:BestelRegel){
-    let index = this.bestelling.indexOf(regel, 1);
-    this.bestelling.splice(index);
+      this.bestelling = this.bestelling.filter(obj => obj !== regel);
+      this.dataService.syncBestelling(this.bestelling);
+
   }
   triggerRemove(regel: BestelRegel) {
+    console.log(regel);
     this.winkelmandService.removeFromWinkelmand(regel.product);
   }
   triggerAdd(regel:BestelRegel){
