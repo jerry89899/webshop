@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/java/PaymentSoap/src/main/main.iml" filepath="$PROJECT_DIR$/java/PaymentSoap/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/ICDomain/src/main/main1.iml" filepath="$PROJECT_DIR$/java/ICDomain/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/webshoprest/src/main/main2.iml" filepath="$PROJECT_DIR$/java/webshoprest/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webshop.iml" filepath="$PROJECT_DIR$/webshop.iml" />
+    </modules>
+  </component>
+</project>
