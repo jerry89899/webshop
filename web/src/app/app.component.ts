@@ -13,10 +13,10 @@ export class AppComponent {
   data: any = null;
 
   constructor(private _http: Http) {
-    this.getMyBlog();
+    this.getRest();
   }
 
-  private getMyBlog() {
+  private getRest() {
     return this._http.get('https://jerrylooman.nl/restservice/')
       .map((res: Response) => res.json())
       .subscribe(data => {
