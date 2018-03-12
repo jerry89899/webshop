@@ -1,4 +1,4 @@
-<div ngbDropdown  class="dropdown dropdown-bubble">
+<div ngbDropdown [autoClose]="'false'"  class="dropdown dropdown-bubble">
   <button ngbDropdownToggle id="dLabel" type="button" class="btn btn-default">
     Winkelmandje
     <span class="badge badge-light">{{counter}}</span>
@@ -7,7 +7,7 @@
   </button>
 
   <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dLabel">
-    <h3>Winkelmandje</h3>
+    <h2 class="lead">Winkelmandje</h2>
     <winkelmand></winkelmand>
   </div>
 </div>

@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/java/ICDomain/src/Domain/pom.xml" />
         <option value="$PROJECT_DIR$/java/webshoprest/src/Webshoprest/pom.xml" />
+        <option value="$PROJECT_DIR$/PaymentSoap/pom.xml" />
       </list>
     </option>
   </component>

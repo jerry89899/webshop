@@ -9,15 +9,24 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./addtowinkelmand.component.css']
 })
 export class AddtowinkelmandComponent implements OnInit {
-  @Input('product') product : Product
+  @Input('product') product : Product;
+  added : boolean = false;
   constructor(private service:WinkelmandService) {
-
+    service.getProduct().subscribe(() => {
+      this.added = true;
+    });
+    service.getProductDeleted().subscribe(() => {
+      this.added = false;
+    });
   }
 
   ngOnInit() {
   }
   add(){
     this.service.addToWinkelmand(this.product);
+  }
+  remove(){
+    this.service.removeFromWinkelmand(this.product);
   }
 
 }

@@ -1,1 +1,8 @@
-<button class="btn btn-primary" (click)="add()"><i class="ion-ios-cart-outline"></i></button>
+<button *ngIf="!added"  class="btn btn-outline-success " (click)="add()">
+  Voeg toe
+  <i class="ion-ios-cart-outline"></i>
+</button>
+<button *ngIf="added"  class="btn btn-outline-danger " (click)="remove()">
+  Verwijder
+  <i class="ion-ios-cart-outline"></i>
+</button>

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/java/ICDomain/src/Domain/Domain.iml" filepath="$PROJECT_DIR$/java/ICDomain/src/Domain/Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PaymentSoap/PaymentSoap.iml" filepath="$PROJECT_DIR$/PaymentSoap/PaymentSoap.iml" />
       <module fileurl="file://$PROJECT_DIR$/java/webshoprest/src/Webshoprest/Webshoprest.iml" filepath="$PROJECT_DIR$/java/webshoprest/src/Webshoprest/Webshoprest.iml" />
     </modules>
   </component>

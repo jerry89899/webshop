@@ -1,6 +1,40 @@
 <section>
   <section class="winkel-lijst" *ngIf="bestelling.length > 0" >
-    <ul class="list-group list-group-flush">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Naam</th>
+          <th scope="col">Aantal</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let regel of bestelling" >
+           <th scope="row">1</th>
+           <td>{{regel.product.naam}}</td>
+           <td>
+             <div class="input-group mb-3 input-group-sm">
+
+               <div class="input-group-prepend">
+                 <button class="btn btn-outline-danger" type="button"><i class="ion-ios-remove"></i></button>
+               </div>
+               <input type="number" class="form-control" value="{{regel.aantal}}" />
+               <div class="input-group-append">
+                 <button class="btn btn-outline-success" (click)="incrementAmount(regel)"><i class="ion-ios-add"></i></button>
+               </div>
+             </div>
+           </td>
+           <td>
+             <button class="btn btn-outline-danger btn-sm" (click)="triggerRemove(regel)">
+               <i class="ion-ios-trash-outline"></i>
+             </button>
+           </td>
+         </tr>
+      </tbody>
+    </table>
+  <!--  <ul class="list-group list-group-flush">
+
       <li *ngFor="let regel of bestelling"  class="list-group-item d-flex justify-content-between">
         <div class="float-left">
           {{regel.product.naam}}
@@ -16,10 +50,12 @@
       <li>
         {{totalPrice}}
       </li>
-    </ul>
+    </ul>-->
   </section>
   <section *ngIf="bestelling.length == 0">
-    Nog geen producten toegevoegd.
+    <div class="alert alert-danger" role="alert">
+      Nog geen producten toegevoegd.
+    </div>
   </section>
 
 </section>

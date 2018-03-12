@@ -6,11 +6,10 @@ import { BestelRegel } from '../../domain';
   styleUrls: ['./winkelmand.component.css']
 })
 export class WinkelmandComponent implements OnInit {
-  private bestelling : Array<BestelRegel>;
+  private bestelling : Array<BestelRegel> = new Array<BestelRegel>();
   private totalPrice : number = 0.0;
   constructor() {
-    this.bestelling = new Array<BestelRegel>();
- }
+  console.log("test") }
 
   ngOnInit() {
   }
