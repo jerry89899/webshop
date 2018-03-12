@@ -13,12 +13,8 @@ export class AppComponent {
   products : Array<Product>;
 
   constructor(private _http: Http) {
-<<<<<<< HEAD
     this.getRest();
-=======
     this.products = new Array<Product>();
-    this.getMyBlog();
->>>>>>> origin/master
   }
 
   private getRest() {
@@ -30,6 +26,7 @@ export class AppComponent {
           newproduct.naam = product.product_titel;
           newproduct.afbeelding = product.product_afbeelding;
           newproduct.prijs = product.product_prijs;
+          newproduct.omschrijving = product.product_omschrijving;
           this.products.push(newproduct);
         }
         console.log(this.products);
