@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ICDomain.iml" filepath="$PROJECT_DIR$/ICDomain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../webshoprest/webshoprest.iml" filepath="$PROJECT_DIR$/../webshoprest/webshoprest.iml" />
+    </modules>
+  </component>
+</project>

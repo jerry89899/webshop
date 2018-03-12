@@ -6,15 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Domain" />
-        <module name="PaymentSoap" />
-        <module name="Webshoprest" />
+        <module name="ICDomain" />
+        <module name="webshoprest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Domain" target="1.6" />
-      <module name="PaymentSoap" target="1.8" />
-      <module name="Webshoprest" target="1.6" />
+      <module name="ICDomain" target="1.6" />
+      <module name="UnitTest" target="1.6" />
+      <module name="webshoprest" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

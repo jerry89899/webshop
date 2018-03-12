@@ -13,11 +13,11 @@ export class AppComponent {
   products : Array<Product>;
 
   constructor(private _http: Http) {
+    this.getRest();
     this.products = new Array<Product>();
-    this.getMyBlog();
   }
 
-  private getMyBlog() {
+  private getRest() {
     return this._http.get('https://jerrylooman.nl/restservice/')
       .map((res: Response) => res.json())
       .subscribe(data => {
@@ -27,6 +27,7 @@ export class AppComponent {
           newproduct.naam = product.product_titel;
           newproduct.afbeelding = product.product_afbeelding;
           newproduct.prijs = product.product_prijs;
+          newproduct.omschrijving = product.product_omschrijving;
           this.products.push(newproduct);
         }
       });
