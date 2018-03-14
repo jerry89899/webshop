@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Product} from './domain';
+import {Product} from '../domain';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
 })
-export class AppComponent {
+export class ProductsComponent {
   title = 'app';
   products: Array<Product>;
 
