@@ -8,7 +8,7 @@ import {ProductsComponent} from './products/products.component';
   imports: [
     RouterModule.forRoot([
       {
-        path: 'product',
+        path: 'product/:id',
         component: ProductdetailComponent,
       },
       {

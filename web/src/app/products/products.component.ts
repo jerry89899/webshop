@@ -21,13 +21,14 @@ export class ProductsComponent {
     return this._http.get('https://jerrylooman.nl/restservice/')
       .map((res: Response) => res.json())
       .subscribe(data => {
+        console.log(data);
         for (let product of data) {
           let newproduct = new Product();
-          newproduct.id = product.product_id;
-          newproduct.naam = product.product_titel;
-          newproduct.afbeelding = product.product_afbeelding;
-          newproduct.prijs = product.product_prijs;
-          newproduct.omschrijving = product.product_omschrijving;
+          newproduct.id = product.id;
+          newproduct.naam = product.naam;
+          newproduct.plaatje = product.plaatje;
+          newproduct.prijs = product.prijs;
+          newproduct.omschrijving = product.omschrijving;
           this.products.push(newproduct);
         }
       });
