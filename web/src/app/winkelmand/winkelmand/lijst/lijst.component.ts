@@ -9,7 +9,6 @@ import { ProviderService } from '../../data/provider.service';
   styleUrls: ['./lijst.component.css']
 })
 export class LijstComponent implements DoCheck, OnInit  {
-  @Input('bestelling') bestelling : Array<BestelRegel> = new Array<BestelRegel>();
   addSubscription: Subscription;
   removeSubscription: Subscription;
   differ : any;
@@ -17,9 +16,9 @@ export class LijstComponent implements DoCheck, OnInit  {
   constructor(
     private winkelmandService: WinkelmandService,
     private dataService : ProviderService,
-    differs: IterableDiffers
+  //  differs: IterableDiffers
   ) {
-    this.differ = differs.find([]).create(null);
+//    this.differ = differs.find([]).create(null);
     this.addSubscription = this.winkelmandService.getProduct().subscribe(product => {
 
       let regel = new BestelRegel();
@@ -35,7 +34,7 @@ export class LijstComponent implements DoCheck, OnInit  {
 
   getRegelByProduct(product: Product) : BestelRegel {
     let getRegel : BestelRegel = null;
-    this.bestelling.forEach((regel) => {
+    this.winkelmandService.getBestelling().forEach((regel) => {
       console.log(regel.product.id == product.id);
       if(regel.product.id == product.id){
         getRegel = regel;
@@ -48,18 +47,11 @@ export class LijstComponent implements DoCheck, OnInit  {
     this.syncBestelling();
   }
   ngDoCheck() {
-     const change = this.differ.diff(this.bestelling);
-     this.totalPrice = this.calculatePrice();
+     /*const change = this.differ.diff(this.winkelmandService.getBestelling());
+     this.totalPrice = this.calculatePrice();*/
    }
   calculatePrice() : number {
-    let prijs = 0.0;
-    if(this.bestelling != undefined){
-      this.bestelling.forEach(regel => {
-          prijs = regel.product.prijs * regel.aantal;
-      });
-    }
-
-    return prijs;
+    return this.winkelmandService.getBestellingTotal();
   }
   syncBestelling(){
     /**
@@ -69,22 +61,25 @@ export class LijstComponent implements DoCheck, OnInit  {
       /**
       * Update nu alle items in de store (Zodat de knop veranderd)
       **/
-      bestelling.forEach((regel) => {
-        this.triggerAdd(regel);
-      });
+      if(bestelling != null){
+        bestelling.forEach((regel) => {
+          this.triggerAdd(regel);
+        });
+
+      }
 
     });
 
   }
 
   addItem(regel:BestelRegel){
-      this.bestelling.push(regel);
-      this.dataService.syncBestelling(this.bestelling);
+    this.winkelmandService.addRegel(regel)
+    this.dataService.syncBestelling(this.winkelmandService.getBestelling());
 
   }
   removeItem(regel:BestelRegel){
-      this.bestelling = this.bestelling.filter(obj => obj !== regel);
-      this.dataService.syncBestelling(this.bestelling);
+    this.winkelmandService.removeRegel(regel);
+      this.dataService.syncBestelling(this.winkelmandService.getBestelling());
 
   }
   triggerRemove(regel: BestelRegel) {
@@ -101,5 +96,6 @@ export class LijstComponent implements DoCheck, OnInit  {
   }
   decrementAmount(regel:BestelRegel){
     regel.aantal -=1;
+
   }
 }

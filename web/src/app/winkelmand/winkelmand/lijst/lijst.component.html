@@ -1,5 +1,5 @@
 <section>
-  <section class="winkel-lijst" *ngIf="bestelling.length > 0" >
+  <section class="winkel-lijst" *ngIf="winkelmandService.getBestelling().length > 0" >
     <table class="table">
       <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let regel of bestelling" >
+        <tr *ngFor="let regel of winkelmandService.getBestelling()" >
            <th scope="row">1</th>
            <td>{{regel.product.naam}}</td>
            <td>
@@ -52,7 +52,7 @@
       </li>
     </ul>-->
   </section>
-  <section *ngIf="bestelling.length == 0">
+  <section *ngIf="winkelmandService.getBestelling().length == 0">
     <div class="alert alert-danger" role="alert">
       Nog geen producten toegevoegd.
     </div>

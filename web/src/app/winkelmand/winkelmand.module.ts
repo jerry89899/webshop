@@ -8,17 +8,22 @@ import { AddtowinkelmandComponent } from './addtowinkelmand/addtowinkelmand.comp
 import { WinkelmandService } from './winkelmand.service';
 import { ProviderService } from './data/provider.service';
 import { BubbleComponent } from './views/bubble/bubble.component';
+import {RouterModule, Routes} from '@angular/router';
+import { OverviewComponent } from './views/overview/overview.component';
+
 @NgModule({
   imports: [
     NgbModule,
     CommonModule,
-    AsyncLocalStorageModule
+    AsyncLocalStorageModule,
+    RouterModule
   ],
-  declarations: [LijstComponent, WinkelmandComponent, AddtowinkelmandComponent, BubbleComponent],
+  declarations: [LijstComponent, WinkelmandComponent, AddtowinkelmandComponent, BubbleComponent, OverviewComponent],
   exports: [
     WinkelmandComponent,
     AddtowinkelmandComponent,
-    BubbleComponent
+    BubbleComponent,
+    OverviewComponent
   ],
   providers: [
     WinkelmandService,
