@@ -3,7 +3,7 @@
     <a href="#"><img class="card-img-top" src="{{product.plaatje}}" alt=""></a>
     <div class="card-body">
       <h4 class="card-title">
-        <a href="#">{{product.naam}}</a>
+        <a  [routerLink]="['/product', product.id]">{{product.naam}}</a>
       </h4>
       <h5>${{product.prijs}}</h5>
       <p class="card-text">{{product.omschrijving}}</p>

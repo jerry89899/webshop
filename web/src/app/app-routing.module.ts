@@ -10,7 +10,7 @@ import { CategorieenComponent } from './sidebar/categorieen/categorieen.componen
   imports: [
     RouterModule.forRoot([
       {
-        path: 'product',
+        path: 'product/:id',
         component: ProductdetailComponent,
         outlet: 'content'
       },
