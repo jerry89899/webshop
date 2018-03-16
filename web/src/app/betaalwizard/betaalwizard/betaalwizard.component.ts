@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Adres, Account, Klant } from '../../domain';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-betaalwizard',
@@ -10,36 +11,35 @@ export class BetaalwizardComponent implements OnInit {
   private klant : Klant;
   private addresList : Array<Adres> = new Array<Adres>();
   private factuurAdres : Adres;
-  constructor() {
-    this.loadKlant();
-    this.loadAddresses();
+  private loading:boolean = false;
+  private bankOpties : Array<string> = [
+    "Rabobank",
+    "ING"
+  ];
+  private geselecteerdeBank : string = this.bankOpties[0];
+  constructor(private authService : AuthService) {
+    this.authService.getKlant().then((res : Klant) => {
+      this.klant = res;
+      console.log(this.klant);
+    });
+    this.authService.getAddresses().then((res : Array<Adres>) => {
+      this.addresList = res;
+      console.log(this.addresList);
+    });
   }
 
   ngOnInit() {
   }
-  loadKlant(){
-    let klant = new Klant();
-    klant.id = 1;
-    klant.naam = "Tjibbe";
-    this.klant = klant;
-    let account = new Account();
-    account.id = 2;
-    account.openDatum = "15-03-2018";
-    account.isActief = true;
-    this.klant.account = account;
-  }
-  loadAddresses(){
-    let adres1 = new Adres();
-    adres1.straat = "Warande";
-    adres1.straatNummer = 34;
-    adres1.id = 1;
-    let adres2 = new Adres();
-    adres2.straat = "Biltstraat";
-    adres2.straatNummer = 33;
-    adres2.id = 2;
 
-    this.addresList.push(adres1);
-    this.addresList.push(adres2);
-    this.factuurAdres = adres1;
+  /**
+  * Simuleer nu "even wachten op de server"
+  **/
+  checkout(){
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 2000);
   }
 }

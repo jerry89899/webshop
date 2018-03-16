@@ -1,7 +1,10 @@
 .row{
   margin-top: 40px;
 }
-html, body {
+#main-page {
   height: 100%;
   min-height: 100%;
+}
+.container {
+  height: 100%;
 }

@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {ProductdetailComponent} from './productdetail/productdetail.component';
 import { ProductsComponent } from './products/products.component';
 import { CategorieenComponent } from './sidebar/categorieen/categorieen.component';
-
+import { LoadingModule } from 'ngx-loading';
+import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +25,9 @@ import { CategorieenComponent } from './sidebar/categorieen/categorieen.componen
     WinkelmandModule,
     BetaalwizardModule,
     AppRoutingModule,
+    LoadingModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
