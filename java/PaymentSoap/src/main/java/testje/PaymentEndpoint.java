@@ -9,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.UUID;
+
 
 @Endpoint
 public class PaymentEndpoint {
@@ -37,6 +39,7 @@ public class PaymentEndpoint {
         bestelling.setBestelid(request.getBestelid());
         payment.setBestelling(bestelling);
         GetPaymentResponse response = new GetPaymentResponse();
+        response.setUniquePaymentId(UUID.randomUUID().toString());
         response.setPayment(payment);
 
         return response;
