@@ -18,14 +18,14 @@ export class BetaalwizardComponent implements OnInit {
   ];
   private geselecteerdeBank : string = this.bankOpties[0];
   constructor(private authService : AuthService) {
+    this.loading = true;
     this.authService.getKlant().then((res : Klant) => {
       this.klant = res;
-      console.log(this.klant);
+      this.addresList = this.klant.account.adresList;
+      this.loading = false;
+
     });
-    this.authService.getAddresses().then((res : Array<Adres>) => {
-      this.addresList = res;
-      console.log(this.addresList);
-    });
+
   }
 
   ngOnInit() {

@@ -1,0 +1,9 @@
+bier\webshop\GetPaymentResponse.class
+testje\PaymentEndpoint.class
+testje\WebServiceConfig.class
+bier\webshop\Payment.class
+testje\Application.class
+bier\webshop\Bestelling.class
+bier\webshop\package-info.class
+bier\webshop\GetPaymentRequest.class
+bier\webshop\ObjectFactory.class

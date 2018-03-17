@@ -1,0 +1,31 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="bier/webshop"
+           targetNamespace="bier/webshop" elementFormDefault="qualified">
+
+    <xs:element name="getPaymentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="bestelid" type="xs:positiveInteger"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPaymentResponse" >
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="payment" type="tns:payment" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="payment">
+        <xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="bestelling" type="tns:bestelling"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="bestelling">
+        <xs:attribute name="bestelid" type="xs:positiveInteger"/>
+    </xs:complexType>
+</xs:schema>

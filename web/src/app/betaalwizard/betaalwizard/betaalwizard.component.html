@@ -6,15 +6,16 @@
     <winkelmand-overview></winkelmand-overview>
 
   </div>
+
   <div class="col-md-8 order-md-1">
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 
     <h4 class="mb-3">Betaal adres</h4>
     <form class="needs-validation" novalidate>
       <div class="row">
-        <div class="col-md-12 mb-12">
+        <div class="col-md-12 mb-12 form-group">
           <label for="firstName">Naam</label>
-          <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+          <input type="text" disabled value="{{klant?.naam}}" class="form-control" id="firstName" placeholder="" value="" required>
           <div class="invalid-feedback">
             Valid first name is required.
           </div>

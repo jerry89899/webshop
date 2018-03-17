@@ -12,18 +12,11 @@ export class AuthService {
     let promise = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(this.loadKlant());
-      }, 2000)
+      }, 2000);
     });
     return promise;
   }
-  getAddresses(){
-    let promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.getAddresses());
-      }, 2000)
-    });
-    return promise;
-  }
+
   /**
   * test data
   **/
@@ -35,6 +28,7 @@ export class AuthService {
     account.id = 2;
     account.openDatum = "15-03-2018";
     account.isActief = true;
+    account.adresList = this.loadAddresses();
     klant.account = account;
     return klant;
   }
