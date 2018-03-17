@@ -11,15 +11,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let regel of winkelmandService.getBestelling()" >
-           <th scope="row">1</th>
+           <th scope="row">{{regel.product.id}}</th>
            <td>{{regel.product.naam}}</td>
            <td>
              <div class="input-group mb-3 input-group-sm">
-
+               {{regel.aantal}}
                <div class="input-group-prepend">
-                 <button class="btn btn-outline-danger" type="button"><i class="ion-ios-remove"></i></button>
+                 <button class="btn btn-outline-danger" (click)="decrementAmount(regel)" type="button"><i class="ion-ios-remove"></i></button>
                </div>
-               <input type="number" class="form-control" value="{{regel.aantal}}" />
+               <input type="number" class="form-control" [value]="regel.aantal" />
                <div class="input-group-append">
                  <button class="btn btn-outline-success" (click)="incrementAmount(regel)"><i class="ion-ios-add"></i></button>
                </div>

@@ -36,6 +36,9 @@ export class WinkelmandService {
     getBestelling(){
       return this.bestelling;
     }
+    resetBestelling(){
+      this.bestelling = new Array<BestelRegel>();
+    }
     getBestellingTotal() : number{
       let prijs = 0.0;
       if(this.bestelling != undefined){

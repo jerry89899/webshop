@@ -24,6 +24,7 @@ export class ProductsComponent {
         for (let product of data) {
 
           this.products.push(product);
+          
         }
       });
   }

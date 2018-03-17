@@ -4,7 +4,7 @@ import {ProductdetailComponent} from './productdetail/productdetail.component';
 import {ProductsComponent} from './products/products.component';
 import { BetaalwizardComponent} from './betaalwizard/betaalwizard/betaalwizard.component';
 import { DefaultComponent } from './betaalwizard/sidebar/default/default.component';
-
+import { ResponseComponent } from './betaalwizard/response/response.component';
 import { CategorieenComponent } from './sidebar/categorieen/categorieen.component';
 @NgModule({
   imports: [
@@ -26,6 +26,16 @@ import { CategorieenComponent } from './sidebar/categorieen/categorieen.componen
       },
       {
         path: 'payment',
+        component: DefaultComponent,
+        outlet: 'sidebar'
+      },
+      {
+        path:'payment/response',
+        component: ResponseComponent,
+        outlet: 'content'
+      },
+      {
+        path:'payment/response',
         component: DefaultComponent,
         outlet: 'sidebar'
       },

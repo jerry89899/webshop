@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Adres, Account, Klant } from '../../domain';
 import { AuthService } from '../../auth.service';
-
+import {Router} from "@angular/router";
+import { ResponseComponent } from '../response/response.component';
 @Component({
   selector: 'app-betaalwizard',
   templateUrl: './betaalwizard.component.html',
@@ -17,7 +18,9 @@ export class BetaalwizardComponent implements OnInit {
     "ING"
   ];
   private geselecteerdeBank : string = this.bankOpties[0];
-  constructor(private authService : AuthService) {
+  constructor(
+    private authService : AuthService,
+    private router: Router) {
     this.loading = true;
     this.authService.getKlant().then((res : Klant) => {
       this.klant = res;
@@ -39,7 +42,7 @@ export class BetaalwizardComponent implements OnInit {
 
     setTimeout(() => {
       this.loading = false;
-
-    }, 2000);
+      this.router.navigate([{outlets: {'content': ['payment', 'response']}}]);
+    });
   }
 }
