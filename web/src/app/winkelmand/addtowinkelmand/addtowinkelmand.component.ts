@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Product } from '../../domain';
 import { WinkelmandService }  from '../winkelmand.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,12 +12,6 @@ export class AddtowinkelmandComponent implements OnInit {
   @Input('product') product : Product;
   private added : boolean = false;
   constructor(private service:WinkelmandService) {
-
-  }
-  isAdded(id : number) : boolean{
-    return this.product.id == id;
-  }
-  ngOnInit() {
     this.service.getProduct().subscribe((product : Product) => {
       if( this.isAdded(product.id)){
         this.added  = true;
@@ -29,6 +23,12 @@ export class AddtowinkelmandComponent implements OnInit {
         this.added  = false;
       }
     });
+  }
+  isAdded(id : number) : boolean{
+    return this.product.id == id;
+  }
+  ngOnInit() {
+
 
   }
   add(){

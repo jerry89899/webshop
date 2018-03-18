@@ -1,2 +1,6 @@
-<lijst [bestelling]="bestelling"></lijst>
-<button class="btn btn-primary">Afrekenen</button>
+<bubble>
+  <lijst></lijst>
+  <button
+   [routerLink]="['', { outlets: { 'sidebar': ['payment'], 'content': ['payment']}}]"
+   class="btn btn-outline-primary" (click)="closeBubble()">Afrekenen</button>
+</bubble>

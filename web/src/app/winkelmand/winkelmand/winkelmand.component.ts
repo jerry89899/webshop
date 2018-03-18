@@ -1,27 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild ,ElementRef} from '@angular/core';
+import { BubbleService} from '../winkelmand/bubble/bubble.service';
 import { BestelRegel } from '../../domain';
 @Component({
   selector: 'winkelmand',
   templateUrl: './winkelmand.component.html',
   styleUrls: ['./winkelmand.component.css']
 })
-export class WinkelmandComponent implements OnInit {
-  private bestelling : Array<BestelRegel> = new Array<BestelRegel>();
+export class WinkelmandComponent {
   private totalPrice : number = 0.0;
-  constructor() {
-  console.log("test") }
+  constructor(private service:BubbleService) {
 
-  ngOnInit() {
   }
-
-  goToPayment(){
-    /**
-    Controlleer eerst of de afrekening kan plaatsvinden (Alle producten kunnen afgerekend worden)
-    **/
-
-    /**
-    * Stuur door naar de betallings-wizard
-    **/
-
+  closeBubble(event) {
+    this.service.closeBubble();
   }
 }

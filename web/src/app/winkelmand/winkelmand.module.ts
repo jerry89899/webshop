@@ -7,22 +7,33 @@ import { WinkelmandComponent } from './winkelmand/winkelmand.component';
 import { AddtowinkelmandComponent } from './addtowinkelmand/addtowinkelmand.component';
 import { WinkelmandService } from './winkelmand.service';
 import { ProviderService } from './data/provider.service';
-import { BubbleComponent } from './views/bubble/bubble.component';
+import { BubbleComponent } from './winkelmand/bubble/bubble.component';
+import {RouterModule, Routes} from '@angular/router';
+import { OverviewComponent } from './views/overview/overview.component';
+import { LoadingModule } from 'ngx-loading';
+import {BubbleService} from './winkelmand/bubble/bubble.service';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     NgbModule,
     CommonModule,
-    AsyncLocalStorageModule
+    AsyncLocalStorageModule,
+    RouterModule,
+    LoadingModule,
+    FormsModule
   ],
-  declarations: [LijstComponent, WinkelmandComponent, AddtowinkelmandComponent, BubbleComponent],
+  declarations: [LijstComponent, WinkelmandComponent, AddtowinkelmandComponent, BubbleComponent, OverviewComponent],
   exports: [
     WinkelmandComponent,
     AddtowinkelmandComponent,
-    BubbleComponent
+    BubbleComponent,
+    OverviewComponent
   ],
   providers: [
     WinkelmandService,
-    ProviderService
+    ProviderService,
+    BubbleService
   ],
 
 })

@@ -13,6 +13,7 @@ export class ProviderService {
     });
   }
   getBestelling() : Observable<Array<BestelRegel>> {
+
     return this.localStorage.getItem<Array<BestelRegel>>('bestelling');
   }
   /**
