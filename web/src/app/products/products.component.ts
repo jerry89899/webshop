@@ -18,7 +18,7 @@ export class ProductsComponent {
   }
 
   private getRest() {
-    return this._http.get('https://jerrylooman.nl/restservice/')
+    return this._http.get('http://localhost:9000/getallproducts')
       .map((res: Response) => res.json())
       .subscribe(data => {
         console.log(data);

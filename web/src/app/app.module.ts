@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ProductdetailComponent} from './productdetail/productdetail.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductdetailComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductCategoryComponent
   ],
   imports: [
     HttpModule,
