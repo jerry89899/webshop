@@ -6,6 +6,8 @@ import { BetaalwizardComponent} from './betaalwizard/betaalwizard/betaalwizard.c
 import { DefaultComponent } from './betaalwizard/sidebar/default/default.component';
 import { ResponseComponent } from './betaalwizard/response/response.component';
 import { CategorieenComponent } from './sidebar/categorieen/categorieen.component';
+import {ProductCategoryComponent} from './product-category/product-category.component';
+
 @NgModule({
   imports: [
     RouterModule.forRoot([
@@ -26,16 +28,21 @@ import { CategorieenComponent } from './sidebar/categorieen/categorieen.componen
       },
       {
         path: 'payment',
-        component: DefaultComponent,
-        outlet: 'sidebar'
+        component: BetaalwizardComponent,
+        outlet: 'content'
       },
       {
-        path:'payment/response',
+        path: 'categories',
+        component: ProductCategoryComponent,
+        outlet: 'content'
+      },
+      {
+        path: 'payment/response',
         component: ResponseComponent,
         outlet: 'content'
       },
       {
-        path:'payment/response',
+        path: 'payment/response',
         component: DefaultComponent,
         outlet: 'sidebar'
       },
