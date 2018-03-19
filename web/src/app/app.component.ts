@@ -17,7 +17,7 @@ export class AppComponent {
     this.categories = new Array<Categorie>();
   }
   private getRest() {
-    return this._http.get('http://localhost:9000/getallcategories')
+    return this._http.get('http://localhost:9000/categories')
       .map((res: Response) => res.json())
       .subscribe(data => {
         console.log(data);

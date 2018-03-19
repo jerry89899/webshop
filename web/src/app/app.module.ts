@@ -10,7 +10,7 @@ import {ProductdetailComponent} from './productdetail/productdetail.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCategoryComponent } from './product-category/product-category.component';
 import { CategorieenComponent } from './sidebar/categorieen/categorieen.component';
-// import { LoadingModule } from 'ngx-loading';
+import { LoadingModule } from 'ngx-loading';
 import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
@@ -26,8 +26,8 @@ import { AuthService } from './auth.service';
     BrowserModule,
     WinkelmandModule,
     BetaalwizardModule,
-    AppRoutingModule
-    // LoadingModule
+    AppRoutingModule,
+    LoadingModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Product} from '../domain';
 import {Injectable} from '@angular/core';
+// import {Appconfig} from '../app.config';
 
 @Component({
   selector: 'app-productdetail',
@@ -21,15 +22,19 @@ export class ProductdetailComponent implements OnInit {
   product_name: string;
   product_description: string;
   product_image: string;
+  // url: string;
 
   constructor(private route: ActivatedRoute, private _http: Http) {
+   // const appconfig = new Appconfig();
+   //  this.url = appconfig.url;
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
+      console.log(this.id);
     });
-    return this._http.get('http://localhost:9000/getproductbyid?id=' + this.id)
+    return this._http.get('http://localhost:9000/products/' + this.id)
       .map((res: Response) => res.json())
       .subscribe(data => {
         this.product_id = data.id;
