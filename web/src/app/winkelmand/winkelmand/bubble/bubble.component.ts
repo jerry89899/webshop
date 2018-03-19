@@ -8,7 +8,7 @@ import { BubbleService } from './bubble.service';
 })
 export class BubbleComponent implements OnInit {
   public counter : number = 0;
-  private @ViewChild('dropdownObject') dropdownObject : any;
+  @ViewChild('dropdownObject') dropdownObject;
   constructor(winkelmandService : WinkelmandService, bubbleService : BubbleService) {
     winkelmandService.getProduct().subscribe(product => {
       this.counter += 1;
