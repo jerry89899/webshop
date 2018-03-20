@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Product} from '../domain';
+import {Product, Discount} from '../domain';
 import {Injectable} from '@angular/core';
+import { AppDataService } from '../app-data.service';
+
 // import {Appconfig} from '../app.config';
 
 @Component({
@@ -13,28 +15,28 @@ import {Injectable} from '@angular/core';
 })
 @Injectable()
 export class ProductdetailComponent implements OnInit {
-  title = 'app';
-  id: number;
-  private sub: any;
-  product: Array<Product>;
-  product_id: number;
-  product_price: number;
-  product_name: string;
-  product_description: string;
-  product_image: string;
+  private product: Product;
+  private aanbiedingen : Array<Discount>;
+  private loading : boolean = true;
+
   // url: string;
 
-  constructor(private route: ActivatedRoute, private _http: Http) {
-   // const appconfig = new Appconfig();
-   //  this.url = appconfig.url;
+  constructor(private route: ActivatedRoute, private _http: Http,  private _dataService: AppDataService) {
+    this.sub = this.route.params.subscribe(params => {
+      let id = +params['id']; // (+) converts string 'id' to a number
+      _dataService.loadProduct(id).subscribe((product) => {
+        this.product = product;
+        this.aanbiedingen = product.aanbiedingen;
+        console.log(this.aanbiedingen);
+        this.loading = false;
+      });
+    });
+
   }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
-      console.log(this.id);
-    });
-    return this._http.get('http://localhost:9000/products/' + this.id)
+
+  /*  return this._http.get('http://localhost:9000/products/' + this.id)
       .map((res: Response) => res.json())
       .subscribe(data => {
         this.product_id = data.id;
@@ -44,5 +46,5 @@ export class ProductdetailComponent implements OnInit {
         this.product_description = data.omschrijving;
         this.product = data;
       });
-  }
+  }*/
 }

@@ -1,11 +1,30 @@
-<div class="col-lg-12" >
-  <div class="card mt-4">
-    <img class="card-img-top img-fluid" src="{{this.product_image}}" alt="">
-    <div class="card-body">
-      <h3 class="card-title">{{this.product_name}}</h3>
-      <h4>${{this.product_price}}</h4>
-      <p class="card-text">{{this.product_description}}
+<div class="col-lg-12" *ngIf="product != undefined"  >
+  <div class="row mt-4">
+    <div class="card col-sm">
+      <img class="card-img" src="{{product.plaatje || 'http://placehold.it/150x150'}}" alt="" />
+    </div>
+    <div class="card col-sm">
+      <div class="card-body">
+        <h3 class="card-title">{{product.naam || 'Geen product naam' }}</h3>
+        <h4>${{product.prijs}}</h4>
+        <p class="card-text">{{product.omschrijving || 'Geen omschrijving beschikbaar'}}
+        <div *ngIf="aanbiedingen.length > 0"  class="list-group">
+          <div class="list-group-item" *ngFor="let aanbieding of aanbiedingen" >
+            {{aanbieding | json}}
+          </div>
+          <div class="list-group-item">
+            Uiteindelijke prijs: $xx;
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
         <addtowinkelmand [product]="this.product"></addtowinkelmand>
+
+      </div>
     </div>
   </div>
 </div>
+<div *ngIf="product == undefined"  class="alert alert-danger" role="alert">
+  Product kon niet geladen worden.
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

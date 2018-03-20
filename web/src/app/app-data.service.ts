@@ -42,6 +42,16 @@ export class AppDataService {
         });
       });
   }
+  loadProduct(productId: number) : Observable<Product> {
+    return this._http.get(this.url+":"+this.port+'/products/'+productId)
+    .map(res => {
+        let item = res.json();
+        let product = <Product> item;
+        return product;
+
+      });
+  }
+
   setDiscounts(discounts : Array<Discount>) {
     this.discounts = discounts;
   }
@@ -62,4 +72,5 @@ export class AppDataService {
   getProductsByCategory(categoryId : number) : Array<Product>{
     return this._getCategoryById(categoryId).producten;
   }
+
 }
