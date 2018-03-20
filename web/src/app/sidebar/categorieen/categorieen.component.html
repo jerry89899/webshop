@@ -1,4 +1,10 @@
 <h1 class="my-4">Shop Name</h1>
-<div class="list-group" *ngFor="let categorie of categories">
-  <a href="#" class="list-group-item">{{categorie.naam}}</a>
+<section *ngIf="_dataService.getCategories().length > 0">
+  <div class="list-group list-group-flush"  *ngFor="let categorie of _dataService.getCategories()">
+    <a href="#" [routerLink]="[{ outlets: { content: ['categories', categorie.id]}}]"  *ngIf="categorie.naam != null" routerLinkActive="active" class="list-group-item">{{categorie.naam}}</a>
+  </div>
+</section>
+<div *ngIf="_dataService.getCategories().length == 0 && !loading"  class="alert alert-danger" role="alert">
+  Kon categorieën niet inladen.
 </div>
+<ngx-loading [show]="loading"></ngx-loading>

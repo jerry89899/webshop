@@ -3,6 +3,7 @@ import { Product, BestelRegel }  from '../../../domain';
 import {WinkelmandService } from '../../winkelmand.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ProviderService } from '../../data/provider.service';
+import { ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'lijst',
   templateUrl: './lijst.component.html',
@@ -16,7 +17,7 @@ export class LijstComponent implements OnInit {
   constructor(
     private winkelmandService: WinkelmandService,
     private dataService : ProviderService,
-  //  differs: IterableDiffers
+    private activatedRoute : ActivatedRoute
   ) {
 //    this.differ = differs.find([]).create(null);
     this.addSubscription = this.winkelmandService.getProduct().subscribe(product => {
@@ -28,6 +29,9 @@ export class LijstComponent implements OnInit {
       let regel = this.getRegelByProduct(product);
       this.removeItem(regel);
     });
+    this.activatedRoute.url.subscribe(url =>{
+     console.log("tekjdkjdkdjdk");
+   });
   }
 
   getRegelByProduct(product: Product) : BestelRegel {

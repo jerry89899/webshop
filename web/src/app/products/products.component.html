@@ -1,32 +1,21 @@
-<div *ngFor="let product of products"  class="col-lg-4 col-md-6 mb-4">
-  <div class="card h-100">
-    <a href="#"><img class="card-img-top" src="{{product.plaatje}}" alt=""></a>
-    <div class="card-body">
-      <h4 class="card-title">
-        <a [routerLink]="[{ outlets: { content: ['product', product.id] } }]" >{{product.naam}}</a>
-      </h4>
-      <h5>${{product.prijs}}</h5>
-      <p class="card-text">{{product.omschrijving}}</p>
-      <addtowinkelmand [product]="product"></addtowinkelmand>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+<div *ngIf="products.length > 0" >
+  <div *ngFor="let product of products" [routerLink]="['', { outlets: {'content': ['product', product.id]}}]"  class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+      <img class="card-img-top" src="{{product.plaatje || 'http://placehold.it/150x150'}}" alt="">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a [routerLink]="[{ outlets: { content: ['product', product.id] } }]" >{{product.naam}}</a>
+        </h4>
+        <h5>${{product.prijs}}</h5>
+        <p class="card-text">{{product.omschrijving}}</p>
+        <addtowinkelmand [product]="product"></addtowinkelmand>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+      </div>
     </div>
   </div>
 </div>
-<div *ngFor="let discount of discounts"  class="col-lg-4 col-md-6 mb-4">
-  <div class="card h-100">
-    <a href="#"><img class="card-img-top" src="{{discount.product.naam}}" alt=""></a>
-    <div class="card-body">
-      <h4 class="card-title">
-        <a [routerLink]="[{ outlets: { content: ['product', discount.id] } }]" >{{discount.naam}}</a>
-      </h4>
-      <h5>${{discount.prijs}}</h5>
-      <p class="card-text">{{discount.omschrijving}}</p>
-      <addtowinkelmand [product]="discount"></addtowinkelmand>
-    </div>
-    <div class="card-footer">
-      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-    </div>
-  </div>
+<div *ngIf="products.length == 0 && !loading"  class="alert alert-danger" role="alert">
+  Kon geen producten vinden.
 </div>
