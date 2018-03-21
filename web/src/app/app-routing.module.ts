@@ -51,6 +51,7 @@ import { HomepageComponent } from './homepage/homepage.component';
         outlet: 'sidebar'
       },
 
+
     ])
   ],
   exports: [

@@ -1,14 +1,14 @@
-<div *ngIf="products.length > 0" >
-  <div *ngFor="let product of products" [routerLink]="['', { outlets: {'content': ['product', product.id]}}]"  class="col-lg-4 col-md-6 mb-4">
+<div *ngIf="products.length > 0" class="row" >
+  <div *ngFor="let product of products" class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
-      <img class="card-img-top" src="{{product.plaatje || 'http://placehold.it/150x150'}}" alt="">
+      <img [routerLink]="['', { outlets: {'content': ['product', product.id]}}]" class="card-img-top" src="{{product.plaatje || 'http://placehold.it/150x150'}}" alt="">
       <div class="card-body">
         <h4 class="card-title">
           <a [routerLink]="[{ outlets: { content: ['product', product.id] } }]" >{{product.naam}}</a>
         </h4>
         <h5>${{product.prijs}}</h5>
         <p class="card-text">{{product.omschrijving}}</p>
-        
+
         <addtowinkelmand [product]="product"></addtowinkelmand>
       </div>
       <div class="card-footer">

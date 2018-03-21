@@ -14,6 +14,7 @@ export class LijstComponent implements OnInit {
   removeSubscription: Subscription;
   differ : any;
   totalPrice : number;
+  synced = false;
   constructor(
     private winkelmandService: WinkelmandService,
     private dataService : ProviderService,
@@ -21,7 +22,6 @@ export class LijstComponent implements OnInit {
   ) {
 //    this.differ = differs.find([]).create(null);
     this.addSubscription = this.winkelmandService.getProduct().subscribe(product => {
-
       let regel = this.getRegelByProduct(product);
       regel.product = product;
       this.addItem(regel);
@@ -35,7 +35,16 @@ export class LijstComponent implements OnInit {
     **/
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        this.syncBestelling();
+        console.log(this.synced);
+        if(this.synced){
+          setTimeout(() => {
+            this.winkelmandService.getBestelling().forEach((regel) => {
+              this.triggerAdd(regel);
+            });
+          }, 500);
+
+        }
+
       }
     });
   }
@@ -43,7 +52,6 @@ export class LijstComponent implements OnInit {
   getRegelByProduct(product: Product) : BestelRegel {
     let getRegel : BestelRegel = new BestelRegel();
     this.winkelmandService.getBestelling().forEach((regel) => {
-      console.log(regel.product.id == product.id);
       if(regel.product.id == product.id){
         getRegel = regel;
       }
@@ -70,6 +78,7 @@ export class LijstComponent implements OnInit {
     * Haal lokaal opgeslagen bestelling op
     **/
     this.dataService.getBestelling().subscribe((bestelling) => {
+      this.synced = true;
       /**
       * Update nu alle items in de store (Zodat de knop veranderd)
       **/
@@ -87,9 +96,14 @@ export class LijstComponent implements OnInit {
 
   addItem(regel:BestelRegel){
     console.log(this.winkelmandService.getRegelById(regel).length);
-    if(this.winkelmandService.getRegelById(regel).length == 0){
+    if(this.winkelmandService.getBestelling().indexOf(regel) == -1){
       this.winkelmandService.addRegel(regel)
       this.dataService.syncBestelling(this.winkelmandService.getBestelling());
+
+    }
+    else {
+      this.dataService.syncBestelling(this.winkelmandService.getBestelling());
+
     }
 
 

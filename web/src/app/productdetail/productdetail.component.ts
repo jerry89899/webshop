@@ -27,7 +27,6 @@ export class ProductdetailComponent implements OnInit {
       _dataService.loadProduct(id).subscribe((product) => {
         this.product = product;
         this.aanbiedingen = product.aanbiedingen;
-        console.log(this.aanbiedingen);
         this.loading = false;
       });
     });

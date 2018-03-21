@@ -29,36 +29,4 @@ export class ProductsComponent {
     //this.products = _dataService.getProductsByCategory();
     //console.log(this.products);
   }
-
-/*  private getDiscounts() {
-    return this._http.get('http://localhost:9000/discounts')
-      .map((res: Response) => res.json())
-      .subscribe(data => {
-        for (let discount of data) {
-          let newdiscount = new Discount();
-          newdiscount.id = discount.id;
-          newdiscount.naam = discount.naam;
-          newdiscount.plaatje = discount.plaatje;
-          newdiscount.prijs = discount.prijs;
-          newdiscount.omschrijving = discount.omschrijving;
-          this.products.push(newdiscount);
-        }
-      });
-  }
-  private getRest() {
-    return this._http.get('http://localhost:9000/products')
-      .map((res: Response) => res.json())
-      .subscribe(data => {
-        // console.log(data);
-        for (let product of data) {
-          let newproduct = new Product();
-          newproduct.id = product.id;
-          newproduct.naam = product.naam;
-          newproduct.plaatje = product.plaatje;
-          newproduct.prijs = product.prijs;
-          newproduct.omschrijving = product.omschrijving;
-          this.products.push(newproduct);
-        }
-      });
-  }*/
 }

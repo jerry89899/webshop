@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+      xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+      xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+      xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+      xmlns:tns="bier/webshop"
+      xmlns:s="http://www.w3.org/2001/XMLSchema"
+      xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+      xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+      targetNamespace="bier/webshop"
+      xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="bier/webshop">
+            <xs:element name="getPaymentRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="bestelid" type="xs:positiveInteger"/>
+                        <xs:element ref="tns:klantnaam"/>
+                        <xs:element ref="tns:klantadres"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPaymentResponse">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="payment" type="tns:payment"/>
+                        <xs:element ref="tns:klantnaam"/>
+                        <xs:element ref="tns:klantadres"/>
+                        <xs:element name="unique_payment_id" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+                <xs:unique name="UniquePaymentId">
+                    <xs:selector xpath="payment"/>
+                    <xs:field xpath="@unique_payment_id"/>
+                </xs:unique>
+            </xs:element>
+            <xs:complexType name="payment">
+                <xs:sequence>
+                    <xs:element name="success" type="xs:boolean"/>
+                    <xs:element name="bestelling" type="tns:bestelling"/>
+                    <xs:element name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="bestelling">
+                <xs:attribute name="bestelid" type="xs:positiveInteger"/>
+            </xs:complexType>
+            <xs:element name="klantadres">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="klantnaam">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getPaymentResponse">
+        <wsdl:part element="tns:getPaymentResponse" name="getPaymentResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPaymentRequest">
+        <wsdl:part element="tns:getPaymentRequest" name="getPaymentRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PaymentPort">
+        <wsdl:operation name="getPayment">
+            <wsdl:input message="tns:getPaymentRequest" name="getPaymentRequest"></wsdl:input>
+            <wsdl:output message="tns:getPaymentResponse" name="getPaymentResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PaymentPortSoap11" type="tns:PaymentPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getPayment">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getPaymentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getPaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PaymentPortService">
+        <wsdl:port binding="tns:PaymentPortSoap11" name="PaymentPortSoap11">
+            <soap:address location="https://payment-soap.herokuapp.com:443/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

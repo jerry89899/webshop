@@ -1,16 +1,30 @@
 <ul class="list-group mb-3">
-  <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let regel of service.getBestelling()" >
-    <div>
-      <h6 class="my-0">{{regel.product.naam}}</h6>
-      <small class="text-muted">Aantal: {{regel.aantal}}</small>
+  <li class="row list-group-item d-flex justify-content-between lh-condensed" *ngFor="let regel of service.getBestelling()" >
+    <div class="col-sm-12">
+      <small><b>product: </b>{{regel.product.naam || 'Geen naam'}}</small>
+      <div>
+        <small class="text-muted"><b>Aantal:</b> {{regel.aantal}}</small>
+      </div>
     </div>
-    <span class="text-muted">${{regel.product.prijs}}</span>
+    <div class="col-sm-12">
+      <small class="text-muted"><b>Aanbiedingen</b></small>
+      <ul class="list-group list-group-flush" *ngIf="regel.product.aanbiedingen.length > 0" >
+        <li class="list-group-item" *ngFor="let aanbieding of regel.product.aanbiedingen" >
+          <small class="text-muted">- ${{aanbieding.korting}} korting</small>
+        </li>
+        <li class="list-group-item">
+          <small class="text-muted"><b>Prijs: {{_dataService.getCalculatedProductPrice(regel.product)}}</b></small>
+
+        </li>
+      </ul>
+    </div>
+
   </li>
 
   <li class="list-group-item d-flex justify-content-between">
     <ngx-loading [show]="loading"></ngx-loading>
 
-    <span>Totaal</span>
+    <span>Totaal:</span>
     <strong>$ {{service.getBestellingTotal()}}</strong>
   </li>
 </ul>

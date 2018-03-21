@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
@@ -22,7 +23,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
-
+	@CrossOrigin
     @Bean(name = "payment")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema paymentSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();

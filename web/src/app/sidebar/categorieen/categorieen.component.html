@@ -1,6 +1,17 @@
 <section *ngIf="_dataService.getCategories().length > 0">
-  <div class="list-group list-group-flush"  *ngFor="let categorie of _dataService.getCategories()">
-    <a href="#" [routerLink]="[{ outlets: { content: ['categories', categorie.id]}}]"  *ngIf="categorie.naam != null" routerLinkActive="active" class="list-group-item">{{categorie.naam}}</a>
+
+  <div class="pb-4 list-group list-group-flush">
+    <div class="list-group-item" routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{ exact: true }">
+      Aanbiedingen
+    </div>
+  </div>
+  <span class="lead">Categorieën: </span>
+  <div class="pt-4 list-group list-group-flush">
+
+    <div class="list-group-item" [routerLink]="[{ outlets: { content: ['categories', categorie.id]}}]" *ngFor="let categorie of _dataService.getCategories()" routerLinkActive="active">
+      <img [src]="categorie.plaatje || 'http://placehold.it/150x150'" />
+      <span class="pl-3" *ngIf="categorie.naam != null">{{categorie.naam}}</span>
+    </div>
   </div>
 </section>
 <div *ngIf="_dataService.getCategories().length == 0 && !loading"  class="alert alert-danger" role="alert">

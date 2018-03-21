@@ -72,7 +72,7 @@ export class AppDataService {
   getCalculatedProductPrice(product : Product) : number {
       let finalPrice = product.prijs;
       for (let aanbieding in product.aanbiedingen){
-        //finalPrice -= aanbieding.korting;
+        finalPrice = finalPrice - product.aanbiedingen[aanbieding].korting;
       }
       return finalPrice;
 

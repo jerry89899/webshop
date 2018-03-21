@@ -11,25 +11,32 @@ import { Subscription } from 'rxjs/Subscription';
 export class AddtowinkelmandComponent implements OnInit {
   @Input('product') product : Product;
   private added : boolean = false;
+  private subscriptionRemove : any;
+  private subscriptionAdd : any;
   constructor(private service:WinkelmandService) {
-    this.service.getProduct().subscribe((product : Product) => {
+
+  }
+  isAdded(id : number) : boolean{
+    return this.product.id == id;
+  }
+  ngOnInit() {
+    this.subscriptionAdd = this.service.getProduct().subscribe((product : Product) => {
       if( this.isAdded(product.id)){
+        console.log("addddeeeeddd");
+
         this.added  = true;
       }
     });
-    this.service.getProductDeleted().subscribe((product : Product) => {
+    this. subscriptionRemove = this.service.getProductDeleted().subscribe((product : Product) => {
 
       if( this.isAdded(product.id)){
         this.added  = false;
       }
     });
   }
-  isAdded(id : number) : boolean{
-    return this.product.id == id;
-  }
-  ngOnInit() {
-
-
+  ngOnDestroy() {
+    this.subscriptionAdd.unsubscribe();
+    this.subscriptionRemove.unsubscribe();
   }
   add(){
     this.service.addToWinkelmand(this.product);

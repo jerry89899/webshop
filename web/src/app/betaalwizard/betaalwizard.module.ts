@@ -7,14 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
 import { ResponseComponent } from './response/response.component';
 import {RouterModule, Routes} from '@angular/router';
-
+import { NgxSoapModule } from 'ngx-soap';
 @NgModule({
   imports: [
     WinkelmandModule,
     CommonModule,
     FormsModule,
     LoadingModule,
-    RouterModule
+    RouterModule,
+    NgxSoapModule
   ],
   declarations: [BetaalwizardComponent, DefaultComponent, ResponseComponent],
   exports: [
