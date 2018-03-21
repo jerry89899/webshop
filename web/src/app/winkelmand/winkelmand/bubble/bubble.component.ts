@@ -11,11 +11,10 @@ export class BubbleComponent implements OnInit {
   @ViewChild('dropdownObject') dropdownObject;
   constructor(winkelmandService : WinkelmandService, bubbleService : BubbleService) {
     winkelmandService.getProduct().subscribe(product => {
-      this.counter += 1;
-      console.log(this.counter);
+      this.counter = winkelmandService.getBestelling().length;
     });
     winkelmandService.getProductDeleted().subscribe(product => {
-      this.counter -= 1;
+      this.counter = winkelmandService.getBestelling().length;
     });
     bubbleService.getCloseListener().subscribe(() => {
        this.dropdownObject.close();

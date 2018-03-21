@@ -1,30 +1,48 @@
 <div class="col-lg-12" *ngIf="product != undefined"  >
-  <div class="row mt-4">
-    <div class="card col-sm">
+  <div class="card-deck">
+    <div class="card">
       <img class="card-img" src="{{product.plaatje || 'http://placehold.it/150x150'}}" alt="" />
+
     </div>
-    <div class="card col-sm">
+    <div class="card">
+      <h3 class="card-header">{{product.naam || 'Geen product naam' }}</h3>
       <div class="card-body">
-        <h3 class="card-title">{{product.naam || 'Geen product naam' }}</h3>
-        <h4>${{product.prijs}}</h4>
-        <p class="card-text">{{product.omschrijving || 'Geen omschrijving beschikbaar'}}
-        <div *ngIf="aanbiedingen.length > 0"  class="list-group">
-          <div class="list-group-item" *ngFor="let aanbieding of aanbiedingen" >
-            {{aanbieding | json}}
-          </div>
-          <div class="list-group-item">
-            Uiteindelijke prijs: $xx;
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <addtowinkelmand [product]="this.product"></addtowinkelmand>
+
+        <p class="card-text lead">
+          {{product.omschrijving || 'Geen omschrijving beschikbaar'}}
+        </p>
 
       </div>
+      <div class="card-body">
+        <div *ngIf="aanbiedingen.length > 0"  class="list-group list-group-flush">
+          <div class="list-group-item">
+            Aanbiedingen geldig voor dit product:
+
+          </div>
+          <div class="list-group-item" *ngFor="let aanbieding of aanbiedingen" >
+            <div>Geldigheid: {{aanbieding.vanDatum}} - {{aanbieding.totDatum}}</div>
+            <div>Korting: ${{aanbieding.korting}}</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+        <p class="lead">
+          Uiteindelijke prijs: ${{_dataService.getCalculatedProductPrice(product)}};
+        </p>
+        <addtowinkelmand [product]="this.product"></addtowinkelmand>
+        <button
+         [routerLink]="['', { outlets: { 'sidebar': ['payment'], 'content': ['payment']}}]"
+         class="btn btn-outline-primary">Afrekenen</button>
+       </div>
     </div>
   </div>
+  <div class="row">
+  </div>
 </div>
-<div *ngIf="product == undefined"  class="alert alert-danger" role="alert">
+<div *ngIf="product == undefined && !loading"  class="alert alert-danger" role="alert">
   Product kon niet geladen worden.
 </div>
 <ngx-loading [show]="loading"></ngx-loading>

@@ -22,7 +22,7 @@ export class ProductdetailComponent implements OnInit {
   // url: string;
 
   constructor(private route: ActivatedRoute, private _http: Http,  private _dataService: AppDataService) {
-    this.sub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       let id = +params['id']; // (+) converts string 'id' to a number
       _dataService.loadProduct(id).subscribe((product) => {
         this.product = product;
@@ -47,4 +47,5 @@ export class ProductdetailComponent implements OnInit {
         this.product = data;
       });
   }*/
+  }
 }

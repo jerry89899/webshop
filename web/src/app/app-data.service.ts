@@ -69,6 +69,14 @@ export class AppDataService {
     return categoryById[0];
 
   }
+  getCalculatedProductPrice(product : Product) : number {
+      let finalPrice = product.prijs;
+      for (let aanbieding in product.aanbiedingen){
+        //finalPrice -= aanbieding.korting;
+      }
+      return finalPrice;
+
+  }
   getProductsByCategory(categoryId : number) : Array<Product>{
     return this._getCategoryById(categoryId).producten;
   }
